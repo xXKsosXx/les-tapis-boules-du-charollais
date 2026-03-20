@@ -30,7 +30,8 @@ export async function POST(req: NextRequest) {
     const productId = session.metadata?.product_id;
     const customerEmail = session.customer_details?.email;
     const customerName = session.customer_details?.name;
-    const shippingAddress = (session as Record<string, unknown>).shipping_details as { address?: { line1?: string; postal_code?: string; city?: string } } | undefined;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const shippingAddress = (session as any).shipping_details as { address?: { line1?: string; postal_code?: string; city?: string } } | undefined;
 
     if (!productId) {
       console.error("Pas de product_id dans les metadata");
